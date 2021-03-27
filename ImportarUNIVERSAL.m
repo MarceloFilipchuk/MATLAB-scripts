@@ -281,7 +281,7 @@ for index = 1:10 % length(eegs)
         EEG = eeg_checkset( EEG );
 
         % Re-referencia a un promedio entre todos los canales.
-        EEG = pop_reref( EEG, [] ,'exclude',EEG.nbchan);
+        EEG = pop_reref( EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG'))); % find() busca el indice de EKG.
         EEG = eeg_checkset( EEG );
 
         % Guarda el EEG.

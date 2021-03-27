@@ -284,8 +284,8 @@ for index = 1:length(eegs)
         % -------------------------------------------------------------------------------------------------------------------
         
         % Re-referencia a un promedio entre todos los canales.
-        EEG = pop_reref( EEG, [] ,'exclude',22);
-        EEG = eeg_checkset( EEG );
+        EEG = pop_reref(EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
+        EEG = eeg_checkset(EEG);
         
         [ALLEEG, EEG, CURRENTSET] = eeg_store(ALLEEG, EEG);
     catch ME

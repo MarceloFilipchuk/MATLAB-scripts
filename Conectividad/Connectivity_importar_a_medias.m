@@ -284,7 +284,7 @@ for index = 1:1%length(eegs)
 %         % -------------------------------------------------------------------------------------------------------------------
         
         % Re-referencia a un promedio entre TP9 y TP10.
-        EEG = pop_reref( EEG, [20 21] ,'exclude',22);
+        EEG = pop_reref(EEG, [20 21] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
         
         [ALLEEG, EEG, CURRENTSET] = eeg_store(ALLEEG, EEG); 
     catch ME

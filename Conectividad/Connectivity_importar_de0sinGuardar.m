@@ -45,7 +45,7 @@ EEG = pop_cleanline(EEG, 'bandwidth',2,'chanlist',[1:EEG.nbchan] ,'computepower'
 EEG = eeg_checkset( EEG );
 
 % Re-referencia a un promedio entre todos los canales.
-EEG = pop_reref( EEG, [] ,'exclude',22);
+EEG = pop_reref(EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
 
 eeglab redraw;
 

@@ -2,7 +2,7 @@
 % ---------------------------------------------------------------------------------------------------------------------------
 
 % Directorio de archivos a procesar (directorio raiz) y donde se van a guardar los EDF finales.
-eeg_dir = "E:\Investigacion\EEG\Pacientes con datos sobre dias de cefalea\REVISAR Dx PRIMERO!!!!!";
+eeg_dir = "E:\Investigacion\EEG\Pacientes con datos sobre dias de cefalea\EEG";
 
 % La direccion de 'nk2edf.exe' esta en la carpeta de scripts.
 nk2edf_filepath = extractBefore(mfilename('fullpath'), mfilename); 
@@ -31,41 +31,45 @@ eeg_folder = setdiff(eeg_folder, edf_postscript);
 
 % Itera sobre las carpetas de cada EEG.
 for folder_index = 1:length(eeg_folder)
-    
-    % Carpeta con el DNI del paciente como nombre.
-    folder_dir = strcat(eeg_dir, "\", eeg_folder{folder_index}, "\NKT\EEG2100\");
-    cd(folder_dir);
-    
-    % Busca el archivo '.eeg' para transformar a EDF.
-    eeg = dir('*.eeg');
-    eeg = {eeg.name};
-    eeg = eeg{1};
+    try
+        % Carpeta con el DNI del paciente como nombre.
+        folder_dir = strcat(eeg_dir, "\", eeg_folder{folder_index}, "\NKT\EEG2100\");
+        cd(folder_dir);
 
-    % Ejecuta el archivo 'nk2edf' y pasa como argumento el archivo que quiero cambiar a EDF.
-    cmd = sprintf(strrep(strcat(nk2edf_filepath, "nk2edf.exe %s"), "\", "\\"), eeg); % 'strrep' soluciona caracteres de escape
-    system(cmd);
-    
-    % Busca el archivo ya pasado a EDF.
-    edf = dir('*.edf');
-    edf = {edf.name};
-    
-    % En caso de que se creen mas de un EDF por EEG.
-    if length(edf) == 1
-        % Direccion del EDF.
-        edf = edf{1};
-        edf = strcat(folder_dir,"\",  edf);
+        % Busca el archivo '.eeg' para transformar a EDF.
+        eeg = dir('*.eeg');
+        eeg = {eeg.name};
+        eeg = eeg{1};
 
-        % Mueve el EDF a la carpeta raiz y lo renombra con el DNI del paciente.
-        movefile(edf, strcat(eeg_dir,"\", eeg_folder{folder_index}, ".edf"))
-    else
-        % Agrega el indice a cada EDF
-        for edf_final_index = 1:length(edf)
+        % Ejecuta el archivo 'nk2edf' y pasa como argumento el archivo que quiero cambiar a EDF.
+        cmd = sprintf(strrep(strcat(nk2edf_filepath, "nk2edf.exe %s"), "\", "\\"), eeg); % 'strrep' soluciona caracteres de escape
+        system(cmd);
+
+        % Busca el archivo ya pasado a EDF.
+        edf = dir('*.edf');
+        edf = {edf.name};
+
+        % En caso de que se creen mas de un EDF por EEG.
+        if length(edf) == 1
             % Direccion del EDF.
-            edf_2 = strcat(folder_dir, "\", edf{edf_final_index});
+            edf = edf{1};
+            edf = strcat(folder_dir,"\",  edf);
 
             % Mueve el EDF a la carpeta raiz y lo renombra con el DNI del paciente.
-            movefile(edf_2, strcat(eeg_dir,"\", eeg_folder{folder_index}, "-", int2str(edf_final_index), ".edf"));
+            movefile(edf, strcat(eeg_dir,"\", eeg_folder{folder_index}, ".edf"))
+        else
+            % Agrega el indice a cada EDF
+            for edf_final_index = 1:length(edf)
+                % Direccion del EDF.
+                edf_2 = strcat(folder_dir, "\", edf{edf_final_index});
+
+                % Mueve el EDF a la carpeta raiz y lo renombra con el DNI del paciente.
+                movefile(edf_2, strcat(eeg_dir,"\", eeg_folder{folder_index}, "-", int2str(edf_final_index), ".edf"));
+            end
         end
+    catch ME
+        warning("%s Line %d in '%s'", ME.message,  ME.stack.line, ME.stack.name); %#ok<MEXCEP>
+        continue
     end
 end
 

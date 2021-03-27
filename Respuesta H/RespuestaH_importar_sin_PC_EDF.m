@@ -194,8 +194,8 @@ for index = 1:length(eegs)
         EEG = eeg_checkset( EEG );
 
         % Re referencia a un promedio entre A1 y A2.
-        EEG = pop_reref( EEG, [22 23], 'exclude',24 );
-        EEG = eeg_checkset( EEG );
+        EEG = pop_reref(EEG, [22 23], 'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
+        EEG = eeg_checkset(EEG);
 
         % ICA.
         EEG = pop_runica(EEG, 'icatype', 'runica', 'extended',1); 
