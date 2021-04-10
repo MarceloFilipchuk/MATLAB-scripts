@@ -44,6 +44,9 @@ for findex = 1:length(filepath)
         try
             EEG = pop_loadset('filename', eegs{index}, 'filepath', filepath{findex}); 
             
+            % Elimina canales de EOG
+            EEG = pop_select( EEG, 'nochannel',{'AF9h','AF10h'});
+            
             % Re-referencia a TP9-TP10
             EEG = pop_reref( EEG, [20 21] ,'exclude',22);
             
@@ -55,7 +58,7 @@ for findex = 1:length(filepath)
             EEG = pop_dipfit_settings( EEG, 'hdmfile','E:\\Investigacion\\eeglab2019_1\\plugins\\dipfit3.4\\standard_BEM\\standard_vol.mat',...
                 'coordformat','MNI','mrifile','E:\\Investigacion\\eeglab2019_1\\plugins\\dipfit3.4\\standard_BEM\\standard_mri.mat',...
                 'chanfile','E:\\Investigacion\\eeglab2019_1\\plugins\\dipfit3.4\\standard_BEM\\elec\\standard_1005.elc',...
-                'coord_transform',[0 0 0 0 0 -1.5708 1 1 1] ,'chansel',[1:19] );
+                'coord_transform',[0 0 0 0 0 -1.5708 1 1 1] ,'chansel', find(~strcmp({EEG.chanlocs(:).labels},'EKG')) );
             EEG = eeg_checkset( EEG );
             EEG = pop_multifit(EEG, [1:EEG.nbchan],'threshold',100,'plotopt',{'normlen' 'on'});
             EEG = eeg_checkset( EEG );

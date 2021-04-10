@@ -20,11 +20,11 @@
 
 
 % Direccion de los archivos que se quieren procesar.
-filepath = 'E:\Investigacion\EEG\NORMALES - CONTROL\RESPUESTA H\EEG';
+filepath = 'E:\Investigacion\EEG\Pacientes con datos sobre dias de cefalea\EEG';
 filepath = strcat(filepath, '\');
 
 % Direccion de la carpeta donde se guardan los archivos post script.
-target_path = 'E:\Investigacion\EEG\EEG procesados\Controles';
+target_path = 'E:\Investigacion\EEG\EEG procesados\Migrañosos';
 target_path = strcat(target_path, '\');
 if ~exist(target_path,'dir')
     mkdir(target_path);
@@ -61,81 +61,83 @@ control = contains(upper(filepath), upper('control'));
 % Ejemplo: {'123456.edf 35 'F' 55 '1.2' 'ICTAL'}
 
 eegs ={
-{ '5951564.edf' 68 'F' 0 'Control' '' }
-{ '10683535.edf' 65 'M' 0 'Control' '' }
-{ '14339047.edf' 57 'F' 0 'Control' '' }
-{ '16293599.edf' 54 'F' 0 'Control' '' }
-{ '16742233.edf' 52 'F' 0 'Control' '' }
-{ '16157868.edf' 53 'F' 0 'Control' '' }
-{ '18017224.edf' 51 'F' 0 'Control' '' }
-{ '20700634.edf' 46 'F' 0 'Control' '' }
-{ '22996280.edf' 46 'F' 0 'Control' '' }
-{ '20073257.edf' 49 'F' 0 'Control' '' }
-{ '28104626.edf' 40 'M' 57 'Control - Protocolo de respuesta H' '' }
-{ '25758828.edf' 42 'M' 55 'Control - Protocolo de respuesta H' '' }
-{ '21390696.edf' 46 'F' 0 'Control' '' }
-{ '21395196.edf' 45 'F' 0 'Control' '' }
-{ '22221330.edf' 44 'F' 0 'Control' '' }
-{ '23198334.edf' 45 'F' 0 'Control' '' }
-{ '1700391.edf' 55 'F' 0 'Control' '' }
-{ '22808531.edf' 42 'F' 0 'Control' '' }
-{ '23089919.edf' 43 'F' 0 'Control' '' }
-{ '28432439.edf' 38 'M' 55 'Control - Protocolo de respuesta H' '' }
-{ '27549509.edf' 41 'F' 56 'Control - Protocolo de respuesta H' '' }
-{ '27652980.edf' 38 'F' 0 'Control' '' }
-{ '30648088.edf' 36 'M' 57 'Control - Protocolo de respuesta H' '' }
-{ '26672197.edf' 38 'F' 0 'Control' '' }
-{ '32406969.edf' 34 'M' 60 'Control - Protocolo de respuesta H' '' }
-{ '29714464.edf' 33 'F' 0 'Control' '' }
-{ '31055689.edf' 35 'F' 0 'Control' '' }
-{ '29963925.edf' 32 'F' 0 'Control' '' }
-{ '33380758.edf' 32 'F' 54 'Control - Protocolo de respuesta H' '' }
-{ '33303993.edf' 32 'F' 0 'Control' '' }
-{ '36447393.edf' 29 'M' 56 'Control - Protocolo de respuesta H' '' }
-{ '33701475.edf' 29 'M' 0 'Control' '' }
-{ '34188566.edf' 30 'F' 0 'Control' '' }
-{ '33598751.edf' 30 'F' 0 'Control' '' }
-{ '36232087.edf' 27 'F' 0 'Control' '' }
-{ '31769226.edf' 29 'F' 0 'Control' '' }
-{ '35347104.edf' 26 'F' 0 'Control' '' }
-{ '33639383.edf' 26 'F' 0 'Control' '' }
-{ '40750520.edf' 23 'F' 0 'Control' '' }
-{ '39623688.edf' 24 'F' 0 'Control' '' }
-{ '39620184.edf' 24 'F' 0 'Control' '' }
-{ '39623876.edf' 21 'F' 0 'Control' '' }
-{ '41322619.edf' 20 'F' 0 'Control' '' }
-{ '41736145.edf' 21 'F' 59 'Control - Protocolo de respuesta H' '' }
-{ '39622056.edf' 21 'F' 0 'Control' '' }
-{ '41712730.edf' 20 'M' 60 'Control - Protocolo de respuesta H' '' }
-{ '28432926.edf' 36 'F' 0 'Control' '' }
-{ '42385042.edf' 19 'F' 0 'Control' '' }
-{ '41481729.edf' 20 'F' 0 'Control' '' }
-{ '43130218.edf' 18 'F' 0 'Control' '' }
-{ '42217829.edf' 19 'F' 0 'Control' '' }
-{ '43361091.edf' 18 'F' 0 'Control' '' }
-{ '43132578.edf' 17 'F' 0 'Control' '' }
-{ '43136471.edf' 17 'F' 0 'Control' '' }
-{ '43272306.edf' 17 'F' 0 'Control' '' }
-{ '27550318.edf' 38 'F' 0 'Control' '' }
-{ '31219115.edf' 30 'F' 0 'Control' '' }
-{ '10171493.edf' 66 'M' 0 'Control' '' }
-{ '16833028.edf' 54 'M' 0 'Control' '' }
-{ '16445692.edf' 55 'M' 0 'Control' '' }
-{ '24992919.edf' 44 'F' 0 'Control' '' }
-{ '16740814.edf' 52 'F' 0 'Control' '' }
-{ '18498243.edf' 51 'F' 0 'Control' '' }
-{ '20381885.edf' 51 'F' 0 'Control' '' }
-{ '17530412.edf' 50 'F' 0 'Control' '' }
-{ '20224517.edf' 49 'F' 0 'Control' '' }
-{ '24615679.edf' 44 'F' 0 'Control' '' }
-{ '20998802.edf' 45 'F' 0 'Control' '' }
-{ '24463852.edf' 40 'F' 0 'Control' '' }
-{ '27076906.edf' 40 'F' 0 'Control' '' }
-{ '31105839.edf' 30 'F' 0 'Control' '' }
-{ '36357088.edf' 26 'F' 0 'Control' '' }
-{ '34601430.edf' 27 'F' 0 'Control' '' }
-{ '38736951.edf' 24 'F' 0 'Control' '' }
-{ '41088886.edf' 17 'F' 0 'Control' '' }
+{ '16561154.edf' 55 'F' 52 '1.1' 'INTERICTAL' }
+{ '21628054.edf' 50 'F' 56 '1.2' 'ICTAL' }
+{ '22672559.edf' 48 'F' 56 '1.1' 'ICTAL' }
+{ '23021007.edf' 47 'F' 56 '1.1' 'ICTAL' }
+{ '23267975.edf' 47 'F' 52 '1.1' 'ICTAL' }
+{ '24671814.edf' 45 'F' 54 '1.1' 'INTERICTAL' }
+{ '25921670.edf' 42 'F' 56 '1.2' 'ICTAL' }
+{ '26636248.edf' 41 'F' 57 '1.1' 'ICTAL' }
+{ '26681314.edf' 41 'M' 58 '1.1' 'ICTAL' }
+{ '27065788.edf' 41 'F' 57 '1.1' 'ICTAL' }
+{ '28456579.edf' 39 'F' 58 '1.2' 'INTERICTAL' }
+{ '28655843.edf' 39 'F' 56 '1.2' 'ICTAL' }
+{ '29136654.edf' 48 'F' 54 '1.2' 'ICTAL' }
+{ '29166639.edf' 38 'F' 55 '1.1' 'ICTAL' }
+{ '29253079.edf' 38 'F' 55 '1.1' 'ICTAL' }
+{ '29275688.edf' 38 'M' 55 '1.2' 'INTERICTAL' }
+{ '30469404.edf' 36 'F' 55 '1.1 + 1.2' 'ICTAL' }
+{ '30900116.edf' 36 'M' 59 '1.1' 'ICTAL' }
+{ '30971218.edf' 36 'F' 54 '1.1 + 1.2' 'ICTAL' }
+{ '31337569.edf' 35 'F' 54 '1.1' 'INTERICTAL' }
+{ '31921461.edf' 34 'F' 56 '1.1' 'INTERICTAL' }
+{ '32281962.edf' 34 'F' 54 '1.2' 'INTERICTAL' }
+{ '33029169.edf' 33 'F' 58 '1.2' 'ICTAL' }
+{ '33387926.edf' 32 'F' 0 '1.1' 'ICTAL' }
+{ '33437020.edf' 32 'F' 54 '1.1' 'ICTAL' }
+{ '33700358.edf' 32 'M' 59 '1.1' 'INTERICTAL' }
+{ '34839043.edf' 30 'F' 56 '1.1' 'INTERICTAL' }
+{ '35109977.edf' 30 'F' 52 '1.1' 'ICTAL' }
+{ '37126067.edf' 27 'F' 54 '1.1' 'ICTAL' }
+{ '37732352.edf' 27 'F' 57 '1.2' 'ICTAL' }
+{ '39546581.edf' 24 'F' 59 '1.1' 'INTERICTAL' }
+{ '39733285.edf' 24 'F' 55 '1.1' 'PREICTAL' }
+{ '39736478.edf' 23 'F' 59 '1.2' 'ICTAL' }
+{ '40506862.edf' 21 'F' 49 '1.1' 'ICTAL' }
+{ '41268250.edf' 21 'F' 50 '1.1' 'ICTAL' }
+{ '41440670.edf' 21 'F' 52 '1.1 + 1.2' 'INTERICTAL' }
+{ '42637732.edf' 35 'F' 57 '1.1' 'ICTAL' }
+{ '42642102.edf' 20 'F' 53 '1.1' 'INTERICTAL' }
+{ '42782803.edf' 20 'F' 54 '1.1' 'ICTAL' }
+{ '43143194.edf' 19 'F' 58 '1.1' 'ICTAL' }
+{ '43143713.edf' 19 'F' 0 '1.2' 'INTERICTAL' }
+{ '43673629.edf' 18 'F' 54 '1.1' 'ICTAL' }
+{ '44273002.edf' 17 'F' 0 '1.2' 'ICTAL' }
+{ '44677571.edf' 14 'F' 57 '1.1' 'INTERICTAL' }
+{ '45090150.edf' 16 'F' 56 '1.1' 'ICTAL' }
+{ '45693186.edf' 16 'F' 56 '1.2' 'INTERICTAL' }
+{ '46374112.edf' 14 'F' 55 '1.1' 'INTERICTAL' }
+{ '95926170.edf' 30 'F' 0 '1.2' 'ICTAL' }
+{ '28127064.edf' 39 'F' 57 '1.1' 'ICTAL' }
+{ '26672624.edf' 42 'F' 57 '1.1 + 1.2' 'ICTAL' }
+{ '30330962.edf' 37 'F' 52 '1.1' 'ICTAL' }
+{ '36142459.edf' 28 'F' 54 '1.2' 'INTERICTAL' }
+{ '26790006.edf' 42 'M' 58 '1.1' 'ICTAL' }
+{ '95760930.edf' 35 'F' 55 '1.1' 'ICTAL' }
+{ '17842655.edf' 54 'F' 59 '1.1' 'PREICTAL' }
+{ '36131374.edf' 27 'F' 56 '1.1' 'ICTAL' }
+{ '45487927.edf' 16 'F' 58 '1.1' 'INTERICTAL' }
+{ '33437628.edf' 32 'M' 58 '1.1' 'ICTAL' }
+{ '39693608.edf' 24 'F' 56 '1.1' 'ICTAL' }
+{ '41680083.edf' 21 'M' 55 '1.1' 'ICTAL' }
+{ '40026470.edf' 23 'F' 58 '1.1' 'ICTAL' }
+{ '31058058.edf' 36 'F' 56 '1.1 + 1.2' 'INTERICTAL' }
+{ '29712356.edf' 37 'F' 51 '1.1' 'INTERICTAL' }
+{ '29154320.edf' 38 'F' 0 '1.1' 'INTERICTAL' }
+{ '35915823.edf' 29 'F' 54 '1.2' 'INTERICTAL' }
+{ '30628863.edf' 36 'F' 55 '1.1' 'ICTAL' }
+{ '30661493.edf' 36 'F' 56 '1.1' 'ICTAL' }
+{ '45936466.edf' 16 'M' 54 '1.1' 'ICTAL' }
+{ '39073136.edf' 26 'F' 55 '1.1' 'ICTAL' }
+{ '25736769.edf' 43 'F' 56 '1.1' 'ICTAL' }
+{ '13153801.edf' 61 'F' 55 '1.2' 'ICTAL' }
+{ '37107273.edf' 27 'F' 0 '1.2' 'ICTAL' }
+{ '21139530.edf' 51 'F' 55 '1.1' 'ICTAL' }
+{ '42783515.edf' 56 'F' 20 '1.2' 'ICTAL' }
+{ '26903214.edf' 52 'F' 42 '1.1' 'ICTAL' }
+{ '29476363.edf' 38 'F' 56 '1.1' 'PREICTAL' }
+{ '30123167.edf' 37 'F' 57 '1.1' 'INTERICTAL' }
 };
 
 % Comentario acerca del set.
@@ -203,54 +205,31 @@ for index = 1:length(eegs)
         % Edita los canales usando coordenadas MNI y AF9h y AF10h para los EOG1 y EOG2 respectivamente.
         % NOTA: Revisar que al actualizar el plugin DIPFIT a veces hay que actualizar la direccion del 'lookup', coloca 
         % el radio de la cabeza en base al perimetro cefalico ( PC * 10 / (2 * pi) ).
-        EEG = pop_select( EEG, 'nochannel',{'E' 'T1' 'T2' 'SpO2' 'EEG Mark1' 'EEG Mark2' 'Events/Markers'});
+        EEG = pop_select( EEG, 'nochannel',{'E' 'T1' 'T2' 'SpO2' 'EEG Mark1' 'EEG Mark2' 'Events/Markers' 'X3' 'X4' 'X5' 'X6'});
         
-        if EOG_chan % Si los canales de EOG (PG1 y PG2) estan, los renombra como AF9h y AF10h.
-            if control
-                % Deja el canal de EKG (a veces se confunden y X1 no contiene el ECG, sino X2).
-                [spect] = pop_spectopo(EEG, 1, [0  60000], 'EEG' , 'percent', 100, 'freqrange',[1 80],'electrodes','off',...
-                'plot', 'off','plotchans', [24, 25]);
-                if spect(1, 51) < spect(2, 51)
-                    EEG.old_EKG = EEG.data(25,:);
-                    EEG = pop_select( EEG, 'nochannel',{'X2'});
-                else
-                    EEG.old_EKG = EEG.data(24,:);
-                    EEG = pop_select( EEG, 'nochannel',{'X1'});
-                end
-            else
+        if EOG_chan % Si los canales de EOG (PG1 y PG2) estan, los renombra como AF9h y AF10h.           
+            if ~control
                 EEG = pop_select( EEG, 'nochannel',{'X2'});
+                EEG = pop_chanedit(EEG, 'changefield',{24 'labels' 'EKG'} ,'changefield',{24,'type','EKG'});
             end
-            EEG = pop_chanedit(EEG, 'changefield',{24 'labels' 'EKG'} ,'changefield',{24,'type','EKG'});
             EEG = pop_chanedit(EEG, 'lookup','E:\\Investigacion\\eeglab2021.0\\plugins\\dipfit\\standard_BEM\\elec\\standard_1005.elc',...
                 'settype',{'1:19','EEG'},'changefield',{20,'labels','AF9h'},'changefield',{21,'labels','AF10h'},'changefield',...
                 {22,'labels','TP9'},'changefield',{23,'labels','TP10'},'changefield',{23,'type','EEG'},'changefield',{22,'type','EEG'},...
                 'changefield',{20,'type','EOG'},'changefield',{21,'type','EOG'},'lookup','E:\\Investigacion\\eeglab2021.0\\plugins\\dipfit\\standard_BEM\\elec\\standard_1005.elc');
-            EEG = eeg_checkset( EEG );
         else % El EEG no se grabó usando los canales de EOG
-            if control
-                % Deja el canal de EKG (a veces se confunden y X1 no contiene el ECG, sino X2).
-                [spect] = pop_spectopo(EEG, 1, [0  60000], 'EEG' , 'percent', 100, 'freqrange',[1 80],'electrodes','off',...
-                'plot', 'off','plotchans', [22, 23]);
-                if spect(1, 51) < spect(2, 51)
-                    EEG.old_EKG = EEG.data(23,:);
-                    EEG = pop_select( EEG, 'nochannel',{'X2'});
-                else
-                    EEG.old_EKG = EEG.data(22,:);
-                    EEG = pop_select( EEG, 'nochannel',{'X1'});
-                end
-            else
-                EEG = pop_select( EEG, 'nochannel',{'X2'});
+            if ~control
+                EEG = pop_select( EEG, 'nochannel',{'X2'}); 
+                EEG = pop_chanedit(EEG, 'changefield',{22 'labels' 'EKG'} ,'changefield',{22,'type','EKG'});
             end
-            EEG = pop_chanedit(EEG, 'changefield',{22 'labels' 'EKG'} ,'changefield',{22,'type','EKG'});
             EEG = pop_chanedit(EEG, 'lookup','E:\\Investigacion\\eeglab2021.0\\plugins\\dipfit\\standard_BEM\\elec\\standard_1005.elc',...
                 'settype',{'1:21','EEG'},'changefield',{20,'labels','TP9'},'changefield',{21,'labels','TP10'},'lookup',...
                 'E:\\Investigacion\\eeglab2021.0\\plugins\\dipfit\\standard_BEM\\elec\\standard_1005.elc');
-            EEG = eeg_checkset( EEG );
         end
+        EEG = eeg_checkset( EEG );
 
         % Elimina los eventos que no son de interes.
-        EEG = pop_selectevent( EEG, 'omittype',{'empty' 'PAT I Bipolar EEG' 'REC START VI Bipolar' 'A1+A2 OFF' 'IMP CHECK OFF'...
-            'IMP CHECK ON' 'REC START I Bipolar'}, 'deleteevents','on');
+        EEG = pop_selectevent( EEG, 'omittype',{'empty' 'PAT I Bipolar EEG' 'PAT II Referen EEG' 'PAT III Bipola EEG' 'REC START VI Bipolar'...
+            'A1+A2 OFF' 'IMP CHECK OFF' 'IMP CHECK ON' 'REC START I Bipolar'}, 'deleteevents','on');
         EEG = eeg_checkset( EEG );
 
         % Remueve la baseline.
@@ -262,11 +241,15 @@ for index = 1:length(eegs)
         EEG = eeg_checkset( EEG );
 
         % Recorta hasta el primer evento y deja el EEG de longitud par (para que CleanLine lo limpie completo)
-        EEG = pop_rmdat( EEG, {EEG.event(1).type},[0 EEG.xmax] ,0);
-        EEG = pop_rmdat( EEG, {EEG.event(1).type},[0 (EEG.xmax - mod(EEG.xmax, 2))] ,0);        
-%         eeg_duration = EEG.xmax - EEG.event(1).latency/200;
-%         eeg_duration = eeg_duration - mod(eeg_duration, 2);
-%         EEG = pop_rmdat( EEG, {EEG.event(1).type},[0 eeg_duration] ,0);
+        if isempty(EEG.event)
+            EEG = pop_select( EEG, 'time',[0 (EEG.xmax - mod(EEG.xmax, 2))] );
+        else
+            EEG = pop_rmdat( EEG, {EEG.event(1).type},[0 EEG.xmax] ,0);
+            EEG = pop_rmdat( EEG, {EEG.event(1).type},[0 (EEG.xmax - mod(EEG.xmax, 2))] ,0);        
+%             eeg_duration = EEG.xmax - EEG.event(1).latency/200;
+%             eeg_duration = eeg_duration - mod(eeg_duration, 2);
+%             EEG = pop_rmdat( EEG, {EEG.event(1).type},[0 eeg_duration] ,0);
+        end
 
         % Actualiza los 'timestamp' de los eventos
         for event_index = 1:length(EEG.event)
@@ -278,6 +261,36 @@ for index = 1:length(eegs)
         0,'p',0.05,'pad',2,'plotfigures',0,'scanforlines',1,'sigtype','Channels','tau',100,'verb',1,'winsize',2,...
         'winstep',2); %#ok<NBRAK>
         EEG = eeg_checkset( EEG );
+
+        % Elimina canales de EKG equivocados.
+        if control
+            if EOG_chan % Se usaron canales para EOG.
+                % Deja el canal de EKG (a veces se confunden y X1 no contiene el ECG, sino X2).
+                [spect] = pop_spectopo(EEG, 1, [0  EEG.xmax*1000], 'EEG' , 'percent', 100, 'freqrange',[1 80],'electrodes','off',...
+                'plot', 'off','plotchans', [24, 25]);
+                if spect(1, 21) > spect(2, 21)
+                    EEG.old_EKG = EEG.data(25,:);
+                    EEG = pop_select( EEG, 'nochannel',{'X2'});
+                else
+                    EEG.old_EKG = EEG.data(24,:);
+                    EEG = pop_select( EEG, 'nochannel',{'X1'});
+                end
+                EEG = pop_chanedit(EEG, 'changefield',{24 'labels' 'EKG'} ,'changefield',{24,'type','EKG'});
+            else % No usaron canales para EOG.
+                % Deja el canal de EKG (a veces se confunden y X1 no contiene el ECG, sino X2).
+                [spect] = pop_spectopo(EEG, 1, [0  EEG.xmax*1000], 'EEG' , 'percent', 100, 'freqrange',[1 80],'electrodes','off',...
+                'plot', 'off','plotchans', [22, 23]);
+                if spect(1, 21) > spect(2, 21)
+                    EEG.old_EKG = EEG.data(23,:);
+                    EEG = pop_select( EEG, 'nochannel',{'X2'});
+                else
+                    EEG.old_EKG = EEG.data(22,:);
+                    EEG = pop_select( EEG, 'nochannel',{'X1'});
+                end
+                EEG = pop_chanedit(EEG, 'changefield',{22 'labels' 'EKG'} ,'changefield',{22,'type','EKG'});
+            end
+            EEG = eeg_checkset( EEG );    
+        end
 
         % Re-referencia a un promedio entre todos los canales.
         EEG = pop_reref( EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG'))); % find() busca el indice de EKG.
