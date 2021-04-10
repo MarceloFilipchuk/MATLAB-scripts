@@ -194,14 +194,8 @@ for index = 1:length(eegs)
         EEG = eeg_checkset( EEG );
         
         % Revisa si se grabó con canales de EOG
-        EOG_chan = false;
-        for chan_index = 1:EEG.nbchan
-            if strcmp(EEG.chanlocs(chan_index).labels, 'PG1') || strcmp(EEG.chanlocs(chan_index).labels, 'PG2')
-                EOG_chan = true;
-                break
-            end
-        end
-
+        EOG_chan = any(strcmp({EEG.chanlocs(:).labels},'PG1')) || any(strcmp({EEG.chanlocs(:).labels},'PG2'));
+        
         % Edita los canales usando coordenadas MNI y AF9h y AF10h para los EOG1 y EOG2 respectivamente.
         % NOTA: Revisar que al actualizar el plugin DIPFIT a veces hay que actualizar la direccion del 'lookup', coloca 
         % el radio de la cabeza en base al perimetro cefalico ( PC * 10 / (2 * pi) ).
