@@ -23,7 +23,7 @@ for pindex = 1:length(voxelpath)
         voxtable = readtable(tables{mindex});
         voxtable(:,4:6) = [];
         voxtable = movevars(voxtable, 'VoxelValue', 'Before', 'X_MNI_');
-        voxtable.Hemisfere(:) = string('');
+        voxtable.Hemisfere(:) = "";
 
         for index = 1:size(voxtable,1)
             if strcmp( voxtable.Structure{index}, '*')
@@ -44,7 +44,8 @@ for pindex = 1:length(voxelpath)
                 voxtable.Structure(index) = strcat('LR -', {' '}, voxtable.Structure(index));
             end
         end
-
+        
+        % Elimina duplicados.
         [~, Idx, ~] = unique(voxtable.Structure(:));
         voxtable = voxtable(Idx,:);
 
