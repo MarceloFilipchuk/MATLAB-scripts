@@ -5,11 +5,11 @@
 % ---------------------------------------------------------------------------------------------------------------------------
 
 
-migraine = 'E:\Investigacion\Cefalea\Investigacion\QEEG\EEG\Migrañosos'; % Directorio de migrañosos
-normal = 'E:\Investigacion\Cefalea\Investigacion\QEEG\EEG\Controles'; % Directorio de normales/controles
+migraine = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Migrañosos\CRONICOS'; % Directorio de migrañosos
+normal = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Controles'; % Directorio de normales/controles
 
 % Direccion de los archivos a procesar
-filepath = {migraine, normal};
+filepath = { migraine, normal };
 
 % Nombre de la carpeta y con el que se van a guardar los archivos post-script.
 target_folder = 'AVG - Solo ICA';
@@ -47,6 +47,10 @@ for findex = 1:length(filepath)
             % Elimina canales de EOG
             EEG = pop_select( EEG, 'nochannel',{'AF9h','AF10h'});
             
+            % Re referencia a AVG excluyendo EKG.
+            EEG = pop_reref( EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG'))); % find() busca el indice de EKG.
+            EEG = eeg_checkset( EEG );
+            
             % ICA.
             EEG = pop_runica(EEG, 'icatype', 'runica', 'extended',1); 
             EEG = eeg_checkset( EEG );          
@@ -59,7 +63,8 @@ for findex = 1:length(filepath)
             EEG = eeg_checkset( EEG );
             EEG = pop_multifit(EEG, [1:EEG.nbchan],'threshold',100,'plotopt',{'normlen' 'on'});
             EEG = eeg_checkset( EEG );
-
+%             EEG = fitTwoDipoles(EEG, 'LRR', 35);
+            
             % Guarda.
             EEG = pop_saveset( EEG, 'filename', eegs{index} ,'filepath', target_path);
         catch

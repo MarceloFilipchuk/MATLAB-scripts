@@ -4,7 +4,7 @@
 % ---------------------------------------------------------------------------------------------------------------------------
 
 
-filepath= 'E:\Investigacion\Cefalea\Investigacion\QEEG\EEG\Controles\Solo ICA';
+filepath= 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Migrañosos\CRONICOS\AVG - Solo ICA';
 filepath = strcat(filepath, '\');
 
 % Nombre de la carpeta y con el que se van a guardar los archivos post-script.
@@ -60,7 +60,7 @@ for index = 1:length(eegs)
         % Plotea los componentes eliminados.
 %             pop_prop_extended(EEG, 0, [1]); % Plotea componente cardiaco.
 %             pop_viewprops(EEG, 0, badIcIdx, {'freqrange', [2 80]}, 1, 'ICLabel'); % Plotea todos los componentes a eliminar.
-
+        
         % Guarda el EEG original y los componentes a remover para comparaciones futuras.
         EEG.original_EEG = EEG;
         EEG.original_EEG.rejected_components = badIcIdx;
@@ -70,12 +70,14 @@ for index = 1:length(eegs)
         EEG = pop_subcomp(EEG, badIcIdx, 0, 0); % Elimina solo los componentes listados.
 
         % Post-process to update ICLabel data structure.
-        EEG.etc.ic_classification.ICLabel.classifications = EEG.etc.ic_classification.ICLabel.classifications(setdiff([1:EEG.nbchan], badIcIdx)',:);
+%         EEG.etc.ic_classification.ICLabel.classifications = EEG.etc.ic_classification.ICLabel.classifications(setdiff([1:EEG.nbchan], badIcIdx)',:);
 
         % Post-process to update EEG.icaact.
         EEG.icaact = [];
         EEG = eeg_checkset(EEG, 'ica');
-
+            
+        % Ver antes y despues.
+%         eegplot(EEG.original_EEG.data(find(~strcmp({EEG.chanlocs.labels}, 'EKG')),:), 'data2', EEG.data(find(~strcmp({EEG.chanlocs.labels}, 'EKG')),:), 'eloc_file', EEG.chanlocs(find(~strcmp({EEG.chanlocs.labels}, 'EKG'))), 'events', EEG.event)
         % ---------------------------------------------------------------------------------------------------------------
         if length(EEG.setname) > 8
             EEG.setname = extractBefore(EEG.setname, ' pruned with ICA');
@@ -83,7 +85,7 @@ for index = 1:length(eegs)
 
         % Elimina el canal de EKG
         EEG = pop_select( EEG, 'nochannel',{'EKG'});
-
+        
         EEG = pop_saveset( EEG, 'filename', eegs{index} ,'filepath', target_path);
     catch ME
         warning("%s Line %d in '%s'", ME.message,  ME.stack.line, ME.stack.name);

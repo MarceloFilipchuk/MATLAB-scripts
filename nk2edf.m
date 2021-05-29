@@ -2,7 +2,7 @@
 % ---------------------------------------------------------------------------------------------------------------------------
 
 % Directorio de archivos a procesar (directorio raiz) y donde se van a guardar los EDF finales.
-eeg_dir = "E:\Investigacion\EEG\NORMALES - CONTROL\CONNECTIVITY\EEG";
+eeg_dir = "C:\Users\Marce\Desktop 2\eegs";
 
 % La direccion de 'nk2edf.exe' esta en la carpeta de scripts.
 nk2edf_filepath = extractBefore(mfilename('fullpath'), mfilename); 
