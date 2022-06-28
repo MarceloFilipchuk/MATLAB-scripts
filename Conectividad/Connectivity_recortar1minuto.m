@@ -7,7 +7,7 @@
 % end
 % 
 % % Direccion objetivo.
-% target_path = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Migrañosos';
+% target_path = 'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\EEG\Migrañosos\CRONICOS';
 % 
 % % Direccion con el EEG completo para agregar la marca de tiempo del minuto.
 % event_path = strcat(filepath, '\Con eventos');
@@ -18,32 +18,7 @@
 % missing = {};
 % 
 % eegs = {
-% '43604422.set'
-% '39057518.set'
-% '36802064.set'
-% '34070751.set'
-% '34455144.set'
-% '30844130.set'
-% '30122613.set'
-% '28357169.set'
-% '28127064.set'
-% '26089010.set'
-% '24196666.set'
-% '24014278.set'
-% '24367434.set'
-% '23231229.set'
-% '29606275.set'
-% '17004849.set'
-% '17384808.set'
-% '25455720.set'
-% '28374342.set'
-% '26903214.set'
-% '22672559.set'
-% '24457312.set'
-% '26681314.set'
-% '32354708.set'
-% '23419359.set'
-% 
+% '22096828.set'
 % };
 % 
 % % Quita los eegs de los cuales ya se extrajeron 1 minuto
@@ -78,7 +53,7 @@ cortar = [
    
 
 
-330 390
+40 100
 
 
 ];

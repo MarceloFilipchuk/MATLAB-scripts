@@ -61,31 +61,7 @@ control = contains(upper(filepath), upper('control'));
 % Ejemplo: {'123456.edf 35 'F' 55 '1.2' 'ICTAL'}
 
 eegs ={
-{ '43604422.edf' 18 'F' NaN '1.1 + 1.3' 'CRONICO' }
-{ '39057518.edf' 25 'F' 54 '1.1 + 1.3' 'CRONICO' }
-{ '36802064.edf' 28 'F' NaN '1.1 + 8.2' 'CRONICO' }
-{ '34070751.edf' 31 'F' NaN '1.3 + 8.2' 'CRONICO' }
-{ '34455144.edf' 31 'F' 55 '1.1 + 8.2' 'CRONICO' }
-{ '30844130.edf' 36 'F' 57 '1.1 + 8.2' 'CRONICO' }
-{ '30122613.edf' 37 'F' 56 '1.1 - 8.2' 'CRONICO' }
-{ '28357169.edf' 39 'F' 57 '1.1 + 1.3 + 8.2' 'CRONICO' }
-{ '28127064.edf' 39 'F' 57 '1.1 + 8.2' 'CRONICO' }
-{ '26089010.edf' 43 'F' 57 '1.3' 'CRONICO' }
-{ '24196666.edf' 45 'F' 56 '1.1 + 8.2' 'CRONICO' }
-{ '24014278.edf' 46 'F' NaN '1.1 + 8.2' 'CRONICO' }
-{ '24367434.edf' 46 'F' NaN '1.1 + 8.2' 'CRONICO' }
-{ '23231229.edf' 47 'F' 56 '1.1 + 1.3 + 8.2' 'CRONICO' }
-{ '29606275.edf' 48 'F' 55 '1.1 - 8.2' 'CRONICO' }
-{ '17004849.edf' 55 'F' 53 '1.1 + 1.3 + 8.2' 'CRONICO' }
-{ '17384808.edf' 55 'F' 55 '1.1 + 1.3 + 8.2' 'CRONICO' }
-{ '25455720.edf' 44 'F' 56 '1.2 + 1.3' 'CRONICO' }
-{ '28374342.edf' 40 'F' 56 '1.1 - 8.2' 'CRONICO' }
-{ '26903214.edf' 42 'F' 52 '1.1 + 1.3' 'CRONICO' }
-{ '22672559.edf' 48 'F' 56 '1.1 + 8.2' 'CRONICO' }
-{ '24457312.edf' 45 'F' NaN '1.2 + 1.3' 'CRONICO' }
-{ '26681314.edf' 41 'F' 58 '1.1 + 1.3' 'CRONICO' }
-{ '32354708.edf' 33 'F' NaN '1.2 + 8.2' 'CRONICO' }
-{ '23419359.edf' 46 'F' NaN '1.1 + 1.3 + 8.2' 'CRONICO' }
+{ '22096828.edf' 49 'F' 55 '1.1 + 1.3' 'CRONICO' }
 };
 
 % Comentario acerca del set.
@@ -175,8 +151,8 @@ for index = 1:length(eegs)
         EEG = eeg_checkset( EEG );
 
         % Remueve la baseline.
-        EEG = pop_rmbase( EEG, [],[]);
-        EEG = eeg_checkset( EEG );
+%         EEG = pop_rmbase( EEG, [],[]);
+%         EEG = eeg_checkset( EEG );
 
         % Deja solo las frecuencias superiores a 1Hz(paso indicado en el tutorial de EEGLAB.
         EEG = pop_eegfiltnew(EEG, 'locutoff',1); 
@@ -198,6 +174,10 @@ for index = 1:length(eegs)
             EEG.event(event_index).timestamp = EEG.event(event_index).latency/200;
         end
 
+        % Re-referencia a un promedio entre todos los canales.
+        EEG = pop_reref( EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG'))); % find() busca el indice de EKG.
+        EEG = eeg_checkset( EEG );
+        
         % Cleanline a 50 Hz (la longitud del EEG tiene que ser divisible por la ventana elegida para que limpie todo). 
         EEG = pop_cleanline(EEG, 'bandwidth',2,'chanlist',[1:EEG.nbchan] ,'computepower',1,'linefreqs',50,'normSpectrum',...
         0,'p',0.05,'pad',2,'plotfigures',0,'scanforlines',1,'sigtype','Channels','tau',100,'verb',1,'winsize',2,...
@@ -233,10 +213,6 @@ for index = 1:length(eegs)
             end
             EEG = eeg_checkset( EEG );    
         end
-
-        % Re-referencia a un promedio entre todos los canales.
-        EEG = pop_reref( EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG'))); % find() busca el indice de EKG.
-        EEG = eeg_checkset( EEG );
 
         % Guarda el EEG.
         EEG = pop_saveset( EEG, 'filename', filename ,'filepath', target_path); %#ok<NASGU>

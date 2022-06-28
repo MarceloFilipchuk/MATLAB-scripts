@@ -6,14 +6,14 @@
 
 
 % normal = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Controles\AVG - Solo ICA\Limpios por ICA modificado';
-migraine = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Migrañosos\CRONICOS\AVG - Solo ICA\Limpios por ICA modificado';
+migraine = 'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\EEG\Migrañosos\CRONICOS\AVG - Solo ICA\Limpios por ICA modificado';
 
 % Direccion de los archivos a procesar
 filepath = { migraine};% , normal };
 
 % Direccion donde guardar
 target_folder = 'SLOR clasificados\Cronicos\';
-target_path = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL';
+target_path = 'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL';
 target_path = strcat(target_path, '\', target_folder);
 if ~exist(target_path,'dir')
     mkdir(target_path);
@@ -48,30 +48,7 @@ for findex = 1:length(filepath)
 % eegs = {eegs.name}';
 
 eegs = {
-'43604422.set'
-'39057518.set'
-'36802064.set'
-'34070751.set'
-'34455144.set'
-'30844130.set'
-'30122613.set'
-'28357169.set'
-'28127064.set'
-'26089010.set'
-'24196666.set'
-'24014278.set'
-'24367434.set'
-'23231229.set'
-'29606275.set'
-'17004849.set'
-'17384808.set'
-'25455720.set'
-'28374342.set'
-'26903214.set'
-'22672559.set'
-'24457312.set'
-'26681314.set'
-'32354708.set'
+'22096828.set'
 };
 
     % Itera sobre los archivos a procesar.

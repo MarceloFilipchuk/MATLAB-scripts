@@ -5,11 +5,11 @@
 % ---------------------------------------------------------------------------------------------------------------------------
 
 
-migraine = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Migrañosos\CRONICOS'; % Directorio de migrañosos
-normal = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Controles'; % Directorio de normales/controles
+migraine = 'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\EEG\Migrañosos\CRONICOS'; % Directorio de migrañosos
+% normal = 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Controles'; % Directorio de normales/controles
 
 % Direccion de los archivos a procesar
-filepath = { migraine, normal };
+filepath = { migraine };%, normal };
 
 % Nombre de la carpeta y con el que se van a guardar los archivos post-script.
 target_folder = 'AVG - Solo ICA';

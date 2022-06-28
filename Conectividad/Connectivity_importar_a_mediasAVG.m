@@ -266,6 +266,10 @@ for index = 1:length(eegs)
         EEG = eeg_checkset( EEG );
 %         EEG = pop_select( EEG, 'notime', [0 50] );
         
+        % Re-referencia a un promedio entre todos los canales.
+        EEG = pop_reref(EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
+        EEG = eeg_checkset(EEG);
+
         % Cleanline a 50 Hz (la longitud del EEG tiene que ser divisible por la ventana elegida para que limpie todo). 
         EEG = pop_cleanline(EEG, 'bandwidth',2,'chanlist',[1:EEG.nbchan] ,'computepower',1,'linefreqs',50,'normSpectrum',...
         0,'p',0.05,'pad',2,'plotfigures',0,'scanforlines',1,'sigtype','Channels','tau',100,'verb',1,'winsize',2,...
@@ -282,10 +286,6 @@ for index = 1:length(eegs)
         end
         EEG = pop_chanedit(EEG, 'changefield',{22 'labels' 'EKG'});
         % -------------------------------------------------------------------------------------------------------------------
-        
-        % Re-referencia a un promedio entre todos los canales.
-        EEG = pop_reref(EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
-        EEG = eeg_checkset(EEG);
         
         [ALLEEG, EEG, CURRENTSET] = eeg_store(ALLEEG, EEG);
     catch ME

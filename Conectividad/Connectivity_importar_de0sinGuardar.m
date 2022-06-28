@@ -38,14 +38,14 @@ EEG = eeg_checkset( EEG );
 EEG = pop_eegfiltnew(EEG, 'locutoff',1); 
 EEG = eeg_checkset( EEG );
 
+% Re-referencia a un promedio entre todos los canales.
+EEG = pop_reref(EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
+
 % Cleanline a 50 Hz (la longitud del EEG tiene que ser divisible por la ventana elegida para que limpie todo). 
 EEG = pop_cleanline(EEG, 'bandwidth',2,'chanlist',[1:EEG.nbchan] ,'computepower',1,'linefreqs',50,'normSpectrum',...
 0,'p',0.05,'pad',2,'plotfigures',0,'scanforlines',1,'sigtype','Channels','tau',100,'verb',1,'winsize',2,...
 'winstep',2); %#ok<NBRAK>
 EEG = eeg_checkset( EEG );
-
-% Re-referencia a un promedio entre todos los canales.
-EEG = pop_reref(EEG, [] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
 
 eeglab redraw;
 

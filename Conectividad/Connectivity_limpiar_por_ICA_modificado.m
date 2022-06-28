@@ -4,7 +4,7 @@
 % ---------------------------------------------------------------------------------------------------------------------------
 
 
-filepath= 'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\EEG\Migrañosos\CRONICOS\AVG - Solo ICA';
+filepath= 'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\EEG\Migrañosos\CRONICOS\AVG - Solo ICA';
 filepath = strcat(filepath, '\');
 
 % Nombre de la carpeta y con el que se van a guardar los archivos post-script.

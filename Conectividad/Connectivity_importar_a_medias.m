@@ -266,6 +266,9 @@ for index = 1:1%length(eegs)
         EEG = pop_select( EEG, 'notime', [0 tmp] );
         EEG = eeg_checkset( EEG );
         
+        % Re-referencia a un promedio entre TP9 y TP10.
+        EEG = pop_reref(EEG, [20 21] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
+        
         % Cleanline a 50 Hz (la longitud del EEG tiene que ser divisible por la ventana elegida para que limpie todo). 
         EEG = pop_cleanline(EEG, 'bandwidth',2,'chanlist',[1:EEG.nbchan] ,'computepower',1,'linefreqs',50,'normSpectrum',...
         0,'p',0.05,'pad',2,'plotfigures',0,'scanforlines',1,'sigtype','Channels','tau',100,'verb',1,'winsize',2,...
@@ -283,8 +286,7 @@ for index = 1:1%length(eegs)
 %         EEG = pop_chanedit(EEG, 'changefield',{22 'labels' 'EKG'});
 %         % -------------------------------------------------------------------------------------------------------------------
         
-        % Re-referencia a un promedio entre TP9 y TP10.
-        EEG = pop_reref(EEG, [20 21] ,'exclude', find(strcmp({EEG.chanlocs(:).labels}, 'EKG')));
+        
         
         [ALLEEG, EEG, CURRENTSET] = eeg_store(ALLEEG, EEG); 
     catch ME

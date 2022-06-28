@@ -1,9 +1,15 @@
 % Direcciones para revisar.
 mripath = {
-    'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\Resultados LORETA\MRI\Cronicos vs Ictales';
-    'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\Resultados LORETA\MRI\Ictales vs Controles';
-    'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\Resultados LORETA\MRI\Ictales vs Interictales';
-    'E:\Investigacion\Cefalea\Investigacion\QEEG FINAL\Resultados LORETA\MRI\Interictales vs Controles';  
+%     'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Interictales vs Controles';
+%     'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Ictales vs Controles';
+%     'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Interictales vs Ictales';
+%     'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Cronicos vs Controles';
+%     'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Ictales vs Cronicos';
+%     'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Cronicos vs Interictales';
+ 'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Ictales vs Interictales'
+ 'E:\Investigacion\Cefalea\Trabajos\QEEG FINAL\Resultados LORETA\T-test on Log transf Subject-wise\T-test on Log transf Subject-wise - MRI\Cronicos vs Ictales'
+
+
 };
 
 % Itera sobre cada carpeta.
@@ -36,11 +42,11 @@ for pindex = 1:length(mripath)
         axial = mri(11:229,11:193,:); 
         sagital = mri(42:224,242:459,:);
         sag_padding = zeros(18, 218, 3);
-        sag_padding(:,:,:) = 255;
+        sag_padding(:,:,:) = 0; % Cambiar a 255 para padding en blanco.
         sagital = [sag_padding ; sagital ; sag_padding];
         coronario = mri(42:224,509:690,:);
         cor_padding = zeros(18, 182, 3);
-        cor_padding(:,:,:) = 255;
+        cor_padding(:,:,:) = 0; % Cambiar a 255 para padding en blanco.
         coronario = [cor_padding ; coronario ; cor_padding];
 
         final = [axial, sagital, coronario];
