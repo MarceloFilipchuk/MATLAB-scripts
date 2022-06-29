@@ -2,7 +2,7 @@ load patients_GOLLA.mat
 load commands_GOLLA.mat
 
 % [ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
-for index = 1:10%:length(patients_GOLLA)
+for index = 1:10:10%:length(patients_GOLLA)
     [ALLEEG EEG CURRENTSET ALLCOM] = eeglab;
     tmpcommands = {commands_GOLLA{index:index+9,:}};
     [STUDY ALLEEG] = std_editset( STUDY, [], 'name','GOLLA STUDY',...

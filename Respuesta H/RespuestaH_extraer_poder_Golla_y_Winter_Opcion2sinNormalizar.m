@@ -86,32 +86,32 @@ for index = 1:len
             EEG.patient_info.response = 'N';
         end
         % Define picos, guarda la etiqueta y el EEG correspondiente a cada uno.
-%         EEG.patient_info.first_peak = etiq{1, max_alpha_idx};
-%         EEG.patient_info.first_peak_power = tmp{1,max_alpha_idx};
-%         tmpEEG1 = pop_epoch(EEG, {EEG.patient_info.first_peak}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');      
-%         tmpEEG1 = pop_runica(tmpEEG1, 'icatype', 'runica', 'extended',1,'interrupt','off');
-%         tmpEEG1 = pop_dipfit_settings(tmpEEG1, 'hdmfile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\standard_vol.mat',...
-%             'coordformat','MNI','mrifile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\standard_mri.mat','chanfile',...
-%             'E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\elec\\standard_1005.elc','coord_transform',...
-%             [0 0 0 0 0 -1.5708 1 1 1] ,'chansel',[1:tmpEEG1.nbchan]);
-%         tmpEEG1 = pop_multifit(tmpEEG1, [1:tmpEEG1.nbchan] ,'threshold',100,'plotopt',{'normlen','on'});
-%         tmpEEG1 = rmfield(tmpEEG1, 'patient_info');
-%         EEG.patient_info.first_peak_EEG =  tmpEEG1;
-%         
-%         EEG.patient_info.second_peak = etiq{1, max_beta_idx};
-%         EEG.patient_info.second_peak_power = tmp{1,max_beta_idx};
-%         tmpEEG2 = pop_epoch(EEG, {EEG.patient_info.second_peak}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');      
-%         tmpEEG2 = pop_runica(tmpEEG2, 'icatype', 'runica', 'extended',1,'interrupt','off');
-%         tmpEEG2 = pop_dipfit_settings(tmpEEG2, 'hdmfile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\standard_vol.mat',...
-%             'coordformat','MNI','mrifile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit4.3\\standard_BEM\\standard_mri.mat','chanfile',...
-%             'E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit4.3\\standard_BEM\\elec\\standard_1005.elc','coord_transform',...
-%             [0 0 0 0 0 -1.5708 1 1 1] ,'chansel',[1:tmpEEG2.nbchan]);
-%         tmpEEG2 = pop_multifit(tmpEEG2, [1:tmpEEG2.nbchan] ,'threshold',100,'plotopt',{'normlen','on'});
-%         tmpEEG2 = rmfield(tmpEEG2, 'patient_info');
-%         EEG.patient_info.second_peak_EEG =  tmpEEG2;
+        EEG.patient_info.first_peak = etiq{1, max_alpha_idx};
+        EEG.patient_info.first_peak_power = tmp{1,max_alpha_idx};
+        tmpEEG1 = pop_epoch(EEG, {EEG.patient_info.first_peak}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');      
+        tmpEEG1 = pop_runica(tmpEEG1, 'icatype', 'runica', 'extended',1,'interrupt','off');
+        tmpEEG1 = pop_dipfit_settings(tmpEEG1, 'hdmfile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\standard_vol.mat',...
+            'coordformat','MNI','mrifile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\standard_mri.mat','chanfile',...
+            'E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\elec\\standard_1005.elc','coord_transform',...
+            [0 0 0 0 0 -1.5708 1 1 1] ,'chansel',[1:tmpEEG1.nbchan]);
+        tmpEEG1 = pop_multifit(tmpEEG1, [1:tmpEEG1.nbchan] ,'threshold',100,'plotopt',{'normlen','on'});
+        tmpEEG1 = rmfield(tmpEEG1, 'patient_info');
+        EEG.patient_info.first_peak_EEG =  tmpEEG1;
+        
+        EEG.patient_info.second_peak = etiq{1, max_beta_idx};
+        EEG.patient_info.second_peak_power = tmp{1,max_beta_idx};
+        tmpEEG2 = pop_epoch(EEG, {EEG.patient_info.second_peak}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');      
+        tmpEEG2 = pop_runica(tmpEEG2, 'icatype', 'runica', 'extended',1,'interrupt','off');
+        tmpEEG2 = pop_dipfit_settings(tmpEEG2, 'hdmfile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit\\standard_BEM\\standard_vol.mat',...
+            'coordformat','MNI','mrifile','E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit4.3\\standard_BEM\\standard_mri.mat','chanfile',...
+            'E:\\Investigacion\\eeglab2021.1\\plugins\\dipfit4.3\\standard_BEM\\elec\\standard_1005.elc','coord_transform',...
+            [0 0 0 0 0 -1.5708 1 1 1] ,'chansel',[1:tmpEEG2.nbchan]);
+        tmpEEG2 = pop_multifit(tmpEEG2, [1:tmpEEG2.nbchan] ,'threshold',100,'plotopt',{'normlen','on'});
+        tmpEEG2 = rmfield(tmpEEG2, 'patient_info');
+        EEG.patient_info.second_peak_EEG =  tmpEEG2;
         
         % Guarda el EEG original con sus datos sobre respuestas y picos agregados.
-%         EEG = pop_saveset( EEG, 'filename', EEG.setname ,'filepath', filepath);
+        EEG = pop_saveset( EEG, 'filename', EEG.setname ,'filepath', filepath);
         
     catch ME
         warning("%s Line %d in '%s'", ME.message,  ME.stack.line, ME.stack.name);

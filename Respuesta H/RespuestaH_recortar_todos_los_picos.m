@@ -37,15 +37,8 @@ for findex = 1:length(filepath)
                 % Corta el segmento correspondiente.
                 EEG2 = pop_epoch(EEG, {fe_event}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');
                 % Guarda el EEG original con sus datos sobre respuestas y picos agregados.
-                if fe_event == 6
-                    EEG2 = pop_saveset( EEG2, 'filename', strcat(EEG.setname, '_', 'PHOTO 06Hz') ,'filepath', target_path);
-                end
-                if fe_event == 8
-                    EEG2 = pop_saveset( EEG2, 'filename', strcat(EEG.setname, '_', 'PHOTO 08Hz') ,'filepath', target_path);
-                end
-                if fe_event >= 10
-                    EEG2 = pop_saveset( EEG2, 'filename', strcat(EEG.setname, '_',fe_event) ,'filepath', target_path);
-                end
+                EEG2 = pop_saveset( EEG2, 'filename', strcat(EEG.setname, '_',fe_event) ,'filepath', target_path);
+
             end
         catch ME
             warning("%s Line %d in '%s'", ME.message,  ME.stack.line, ME.stack.name);
