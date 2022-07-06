@@ -1,0 +1,47 @@
+% Preprocesamiento. Carga los EEGs y los datos de cada paciente desde el formato *.edf y una celda dentro del script. Usa de referencia AVG (promedio de todos los electrodos).
+RespuestaH_PreProcessing.m
+
+% La limpieza de los EEGs removiendo componentes se hace a mano. EEG original y componentes removidos se guardan dentro de EEG.original_EEG y EEG.original_EEG.rejected_components.
+% Tambien se elimina el canal de EKG ya que deja de ser util. Pendiente un script que lo haga semiautomaticamente.
+
+% Terminada la limpieza, se procede al siguiente script.
+% Se usa luego de limpiar los EEGs. Rereferencia a TP9-TP10. Realiza ICA y multifit de todo el protocolo completo de fotoestimulacion.
+RespuestaH_PreProcessing_continue.m
+
+% Recorta los picos y los guarda en una carpeta aparte para poder despues cargarlos en el estudio GOLLA y sacar asi el poder de cada segmento del protocolo por separado. 
+RespuestaH_recortar_todos_los_picos.m
+
+% Crea tabla y matrices ('patients_GOLLA.mat' y 'commands_GOLLA.mat') para el estudio que permite obtener los poderes de cada componente fundamental.
+% Guarda las matrices dentro de la carpeta de scripts.
+RespuestaH_CrearTablaParaEstudio_GOLLA.m
+
+% Crea el estudio que permite obtener los poderes de cada componente fundamental. Se calcula en base a cada segmento de fotoestimulacion con una duracion de 9.5 segundos. Los guarda en los archivos *.datspec.
+% Dichos archivos contienen 18 trials (la epoca completa de 9.5 segundos dividida en 18 (19-1) epocas de un segundo cada una con una superposicion del 50% entre ellas.   
+RespuestaH_createStudy_GOLLA.m
+
+% Usando los archivos *.datspec del script anterior, clasifica la respuesta del paciente (H o N) y guarda dentro del mismo los EEG de cada pico.
+% EEG.patient_info contiene EGGs de los picos en alfa y beta (first_peak.EEG y second_peak.EEG).
+% EEG.patient_info tambien contiene el nombre del protocolo de fotoestimulacion que genera el pico y el poder del mismo.
+RespuestaH_extraer_poder_Golla_y_Winter_FFT_Study.m
+
+% Ubica componentes occipitales y los guarda dentro EEG.patient_info. Intenta recuperar un componente por hemisferio.
+% Si hay dos componentes dentro del mismo hemisferio en lobulo occipital, se queda con el que tenga mas poder absoluto en la frecuencia del componente fundamental.
+RespuestaH_ubicar_componentes_occipitales.m
+
+% Extrae y guarda segmentos de EEG en carpetas correspondientes al pico y respuesta del paciente. Permite despues cargarlos en el estudio RESPUESTA H.
+RespuestaH_exportar_segmentos_picos_EEG.m
+
+% Crea la tabla y matrices ('patients.mat' y 'commands.mat') para cargar en el estudio RESPUESTA H.
+% Guarda las matrices en la carpeta del script.
+RespuestaH_CrearTablaParaEstudio_RESPUESTA_H.m
+
+% Crea el estudio para poder procesar los segmentos que contienen los componentes fundamentales.
+RespuestaH_createStudy_RESPUESTA_H.m
+
+% Extrae los picos en formato *.txt para que se pueda usar en LORETA.
+RespuestaH_exportar_segmentos_LORETA.m
+
+% Extrae los componentes independientes de cada pico en formato *.txt para que se pueda usar en LORETA.
+RespuestaH_exportar_componentes_independientes_LORETA.m
+
+

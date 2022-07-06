@@ -1,4 +1,4 @@
-% DEFINIR EL INDEX TIPEANDOLO EN LA CONSOLA.
+% DEFINIR EL INDEX TIPEANDOLO EN LA CONSOLA => index = 1;.
 
 % Direccion de los archivos que se quieren procesar.
 filepath = 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\Controles\Limpios\Rereferenciados + ICA';

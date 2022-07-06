@@ -36,6 +36,7 @@ for findex = 1:length(filepath)
                 fe_event= sprintf(label, eegindex);
                 % Corta el segmento correspondiente.
                 EEG2 = pop_epoch(EEG, {fe_event}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');
+                EEG2.history = [];
                 % Guarda el EEG original con sus datos sobre respuestas y picos agregados.
                 EEG2 = pop_saveset( EEG2, 'filename', strcat(EEG.setname, '_',fe_event) ,'filepath', target_path);
 

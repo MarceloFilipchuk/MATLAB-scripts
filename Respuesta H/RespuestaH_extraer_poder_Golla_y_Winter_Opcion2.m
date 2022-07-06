@@ -3,41 +3,51 @@
 % archivos con los nombres que se especifique  en las variables 'spec_O1', 'spec_O2' y 'spec_AVG'.
 % IMPORTANTE: Solo usar en EEGs que tienen cada frecuencia de fotoestimulacion de 9.5 segundos de duracion.
 % -------------------------------------------------------------------------
-                                                                                                                            
 
-% Direccion de los archivos que se quieren procesar.
-filepath = ...
-    'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\Ictales\Limpios\Rereferenciados + ICA';
-filepath = strcat(filepath, '\');
+% Nombre de los grupos dentro del estudio (Para no tener que cambiar cada direccion para cada grupo).
+group = {
+    'Controles';
+    'Interictales';
+    'Ictales';
+};
+
+% Directorios
+mother_dir = 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\'; % Contiene las carpetas de los grupos.
+eegs_dir = '\Limpios\Rereferenciados + ICA'; % Contiene los EEGs.
+datspec_dir = 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG todos los picos\'; % Contiene los '*.datspec'.
 
 % Nombre y formato de las tablas que se van a crear para O1, O2 y promedio entre O1 y O2.
-spec_O1 = 'espectro_O1.xls';
-spec_O2 = 'espectro_O2.xls';
-spec_AVG = 'espectro_promedio.xls';
-
-% Busca todos los archivos '*.set' en el directorio para procesarlos.
-cd(filepath);
-eegs = dir('*.set');
-eegs = {eegs.name}';
-
-% Crea las matrices vacias para guardar los valores y etiquetas.
-len = length(eegs);
-final = zeros(len, 10);
-O1_final = zeros(len, 10);
-O2_final = zeros(len, 10);
-avgO1O2 =   zeros(len, 10);
-eeg_id = strings(len, 1);
-etiq = ["DNI", "PHOTO 6Hz", "PHOTO 8Hz", "PHOTO 10Hz", "PHOTO 12Hz", "PHOTO 14Hz", "PHOTO 16Hz",...
-    "PHOTO 18Hz", "PHOTO 20Hz", "PHOTO 22Hz", "PHOTO 24Hz", "Max 1er pico", "Max 2do pico", "Respuesta", "MATLAB"];
-
-% Para identificar los segmentos de fotoestimulacion acorde a frecuencia.
-label = 'PHOTO %dHz';
+spec_O1 = 'FFT Abs power O1.xls';
+spec_O2 = 'FFT Abs power O2.xls';
+spec_AVG = 'FFT Abs power promedio O1-O2.xls';
 
 eeglab;
 
+% Itera sobre cada grupo
+for gindex = 1:length(group)
+    % Direccion de los archivos que se quieren procesar.
+    filepath = strcat(mother_dir, group{gindex}, eegs_dir);
+    filepath = strcat(filepath, '\');
 
-% Cada iteracion abre un archivo.
-for index = 1:len
+    % Busca todos los archivos '*.set' en el directorio para procesarlos.
+    cd(filepath);
+    eegs = dir('*.set');
+    eegs = {eegs.name}';
+
+    % Crea las matrices vacias para guardar los valores y etiquetas.
+    len = length(eegs);
+    final = zeros(len, 10);
+    O1_final = zeros(len, 10);
+    O2_final = zeros(len, 10);
+    avgO1O2 =   zeros(len, 10);
+    eeg_id = strings(len, 1);
+    % Original
+%     etiq = ["DNI", "PHOTO 6Hz", "PHOTO 8Hz", "PHOTO 10Hz", "PHOTO 12Hz", "PHOTO 14Hz", "PHOTO 16Hz",...
+%         "PHOTO 18Hz", "PHOTO 20Hz", "PHOTO 22Hz", "PHOTO 24Hz", "Max 1er pico", "Max 2do pico", "Respuesta", "MATLAB"];
+
+
+    % Cada iteracion abre un archivo.
+    for index = 1:len
     
     filename = eegs{index}; 
     % 'tmp' va a contener datos temporales de la respuesta para agregar los datos de la respuesta del paciente al archivo.
@@ -54,13 +64,14 @@ for index = 1:len
         
         % Cada iteracion calcula el espectro para la frecuencia correspondiente k = frecuencia que quiero y k+1 = indice de
         % la frecuencia que necesito de la funcion (porque arranca en 0Hz). 
-        k = 6;
-        for o = 1:10
+        fe_events = [6:2:24];
+        for idx = 1:1:10
 
             beg_label= sprintf(label, k);
 
-            EEG2 = pop_epoch(EEG, {sprintf(label, k)}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');
-            
+            EEG2 = pop_epoch(EEG, {fe_event}, [0 9.505], 'newname', EEG.setname, 'epochinfo', 'yes');
+            EEG2.history = [];
+
             % Calcula el espectro para la frecuencia necesitada en el rango de tiempo correspondiente al evento.
             [spectra, freqs] = pop_spectopo(EEG2, 1, [0 9500], 'EEG' ,...
                 'percent', 100, 'plot', 'off', 'plotchans', [9, 10]);

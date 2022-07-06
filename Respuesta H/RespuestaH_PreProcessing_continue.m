@@ -1,8 +1,4 @@
 % Direccion de los archivos que se quieren procesar.
-% filepath = 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\Controles\Limpios';
-% filepath = 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\Interictales\Limpios';
-% filepath = 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\Ictales\Limpios';
-
 filepath = {
 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\Controles\Limpios';
 'E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG\Interictales\Limpios';
@@ -11,6 +7,7 @@ filepath = {
 
 % Itera sobre cada directorio madre.
 for findex = 1:length(filepath)
+    
     % Direccion de la carpeta donde se guardan los archivos post script.
     target_path = strcat(filepath{findex},'\', 'Rereferenciados + ICA' ,'\');
     if ~exist(target_path,'dir')

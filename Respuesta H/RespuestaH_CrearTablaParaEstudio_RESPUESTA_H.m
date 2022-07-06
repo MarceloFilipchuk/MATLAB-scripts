@@ -1,6 +1,7 @@
 eegs = dir('E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG picos\**\*.set');
-cd('E:\Investigacion\Cefalea\Trabajos\Respuesta H\');
+
 eeglab
+
 % Crea lista de pacientes.
 for index = 1:size(eegs, 1)
     EEG1 = pop_loadset('filename', eegs(index).name, 'filepath', eegs(index).folder);

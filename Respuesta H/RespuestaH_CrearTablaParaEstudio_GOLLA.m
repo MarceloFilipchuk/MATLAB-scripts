@@ -1,5 +1,7 @@
+% Crea matrices para cargar el STUDY y calcular poder con con FFT usando las funciones del STUDY de EEGLAB.
+
 eegs = dir('E:\Investigacion\Cefalea\Trabajos\Respuesta H\EEG todos los picos\**\*.set');
-cd('E:\Investigacion\Cefalea\Trabajos\Respuesta H\');
+
 eeglab
 % Crea lista de pacientes.
 for index = 1:size(eegs, 1)
@@ -42,7 +44,7 @@ t = struct2table(patients_GOLLA);
 t = sortrows(t,{'group', 'subject', 'fe_freq'},'ascend');
 patients_GOLLA = table2struct(t);
 
-save('patients_GOLLA.mat', 'patients_GOLLA');
+save('E:\Investigacion\MATLAB-scripts\Respuesta H\patients_GOLLA.mat', 'patients_GOLLA');
 
 % Crea lista de comandos
 commands_GOLLA = cell(length(patients_GOLLA),1);
@@ -50,7 +52,7 @@ for index = 1:length(patients_GOLLA)
     commands_GOLLA{index} = {'index',index,'load',patients_GOLLA(index).filepath,'subject',patients_GOLLA(index).subject,'condition',patients_GOLLA(index).condition,'group',patients_GOLLA(index).group};
 end
 
-save('commands_GOLLA.mat', 'commands_GOLLA');
+save('E:\Investigacion\MATLAB-scripts\Respuesta H\commands_GOLLA.mat', 'commands_GOLLA');
 
 STUDY = []; CURRENTSTUDY = 0; ALLEEG = []; EEG=[]; CURRENTSET=[];
 eeglab redraw;
