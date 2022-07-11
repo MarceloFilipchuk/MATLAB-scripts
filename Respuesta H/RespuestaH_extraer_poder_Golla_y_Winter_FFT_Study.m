@@ -102,8 +102,8 @@ for gindex = 1:length(group)
                 % Computa AbsPower o 10*log10 para cada canal (O1 y O2).
                 if strcmp(log10, 'on')
                     % Computa 10*log10 para cada canal (O1 y O2). 10*log10 = Power Spectral Density (PSD).
-                    O1_final(index, idx) = 10*log10(spectra_F1(1,1)); % 10*log10 O1
-                    O2_final(index, idx) = 10*log10(spectra_F1(2,1));% 10*log10 O2
+                    O1_final(index, idx) = 10*log10(spectra_F1(1,1)); % 10*log10 O1.
+                    O2_final(index, idx) = 10*log10(spectra_F1(2,1));% 10*log10 O2.
                 elseif strcmp(log10, 'off')
                     % Computea solo Abs power (computados previamente en otras variables).
                     O1_final(index, idx) = spectra_F1(1,1); % Abs power O1.
@@ -156,6 +156,7 @@ for gindex = 1:length(group)
             tmpEEG1 = rmfield(tmpEEG1, 'patient_info');
             tmpEEG1.history = [];
             EEG.patient_info.first_peak_EEG =  tmpEEG1;
+            EEG.patient_info.first_peak_EEG.setname = strcat(EEG.setname, '_', EEG.patient_info.first_peak);
             
             EEG.patient_info.second_peak = etiq{1, max_beta_idx};
             EEG.patient_info.second_peak_power = tmp{1,max_beta_idx};
@@ -169,7 +170,8 @@ for gindex = 1:length(group)
             tmpEEG2 = rmfield(tmpEEG2, 'patient_info');
             tmpEEG2.history = [];
             EEG.patient_info.second_peak_EEG =  tmpEEG2;
-
+            EEG.patient_info.second_peak_EEG.setname = strcat(EEG.setname, '_', EEG.patient_info.second_peak);
+            
             % Guarda el EEG original con sus datos sobre respuestas y picos agregados.
             EEG = pop_saveset( EEG, 'filename', EEG.setname ,'filepath', filepath);
 
