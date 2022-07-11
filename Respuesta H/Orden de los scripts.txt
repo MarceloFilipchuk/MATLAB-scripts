@@ -22,7 +22,7 @@ RespuestaH_createStudy_GOLLA.m
 % Usando los archivos *.datspec del script anterior, clasifica la respuesta del paciente (H o N) y guarda dentro del mismo los EEG de cada pico.
 % EEG.patient_info contiene EGGs de los picos en alfa y beta (first_peak.EEG y second_peak.EEG).
 % EEG.patient_info tambien contiene el nombre del protocolo de fotoestimulacion que genera el pico y el poder del mismo.
-RespuestaH_extraer_poder_Golla_y_Winter_FFT_Study.m
+RespuestaH_extraer_poder_Golla_y_Winter_Study.m
 
 % Ubica componentes occipitales y los guarda dentro EEG.patient_info. Intenta recuperar un componente por hemisferio.
 % Si hay dos componentes dentro del mismo hemisferio en lobulo occipital, se queda con el que tenga mas poder absoluto en la frecuencia del componente fundamental.
